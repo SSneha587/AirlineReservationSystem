@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="Dashboard.css">
+</head>
+<body>
+<h1>Welcome to Your Bookings</h1>
+
+<div th:if="${bookingList != null && bookingList.size() > 0}">
+    <h2>My Bookings</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Flight Name</th>
+            <th>Flight Number</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Date</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="booking : ${bookingList}">
+            <td th:text="${booking.BookingID}"></td>
+            <td th:text="${booking.FlightName}"></td>
+            <td th:text="${booking.FlightNumber}"></td>
+            <td th:text="${booking.FromCity}"></td>
+            <td th:text="${booking.ToCity}"></td>
+            <td th:text="${#dates.format(booking.Date, 'dd-MM-yyyy')}"></td>
+            <td th:text="${booking.Price}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:if="${bookingList == null || bookingList.size() == 0}">
+    <p>No bookings found.</p>
+</div>
+
+<a href="/viewFlights?viewType=table" class="button">View Flights</a>
+<a href="/logout" class="button logout-btn">Logout</a>
+
+</body>
+</html>

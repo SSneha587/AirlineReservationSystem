@@ -1,0 +1,83 @@
+/* Reset margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    background-image: url('Images/flight1.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Align elements vertically */
+    justify-content: flex-start; /* Align elements at the start of the container */
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.flight-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Adjust margin-top as needed */
+}
+
+.flight-table th, .flight-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.flight-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.flight-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.flight-table tr:hover {
+    background-color: #f2f2f2;
+}
+
+.flight-table button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+
+.flight-table button:hover {
+    background-color: #0056b3;
+}
+
+h1 {
+    font-size: 3em;
+    margin-top: 20px; /* Add space at the top */
+}
+
+.button {
+    display: inline-block;
+    margin-top: 20px; /* Add space between h1 and button */
+    padding: 10px 20px;
+    background-color: orange;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #ff6600;
+}

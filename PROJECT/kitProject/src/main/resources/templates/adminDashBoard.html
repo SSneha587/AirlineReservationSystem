@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <style>
+        /* Style for the flight details table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px; /* Add margin above the table */
+        }
+
+        /* Header row styles */
+        table th {
+            background-color: orange;
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        /* Data row styles */
+        table td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        /* Alternate row background color for better readability */
+        table tbody tr {
+            background-color: blue;
+        }
+
+        /* Button styles */
+        button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        /* Button container style */
+        td button {
+            margin: 4px; /* Add some margin around the buttons */
+        }
+
+        /* Container div style */
+        .container {
+            width: 80%;
+            margin: 20px auto; /* Center align the container with top margin */
+            position: relative; /* Enable positioning */
+        }
+
+        /* Logout button style */
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome to the Project Dashboard</h1>
+
+    <a href="/logout" class="button logout-btn">Logout</a>
+    <a href="/AddFlights" class="button">Add Flights</a>
+    <a href="/viewFlightsByAdmin?viewType=table" class="button">View Flights</a>
+
+    <!-- Placeholder for displaying flights -->
+    <div th:if="${viewType == 'table'}">
+        <h2>Flight Details</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Flight Name</th>
+                <th>Flight Number</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Date</th>
+                <th>Price</th>
+                <!-- Add more columns as needed -->
+                <th colspan="4">Actions</th> <!-- Colspan for buttons -->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="flightItem : ${flightList}">
+                <td th:text="${flightItem.Flightname}"></td>
+                <td th:text="${flightItem.Flightnumber}"></td>
+                <td th:text="${flightItem.FromCity}"></td>
+                <td th:text="${flightItem.ToCity}"></td>
+                <td th:text="${#dates.format(flightItem.Date, 'dd-MM-yyyy')}"></td>
+                <td th:text="${flightItem.Price}"></td>
+                <td>
+                    <form method="get" th:action="@{/updateFlight}">
+                        <input type="hidden" name="flightNumber" th:value="${flightItem.Flightnumber}">
+                        <button type="submit">Update Flight</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post" th:action="@{/deleteFlight}">
+                        <input type="hidden" name="flightNumber" th:value="${flightItem.Flightnumber}">
+                        <button type="submit">Delete Flight</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
